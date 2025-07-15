@@ -74,11 +74,12 @@ const Index = () => {
       duration: 'Nov 2024 - Jan 2025',
       description: 'Django-based web app using unsupervised autoencoder model and Apriori algorithm for disease hotspot prediction.',
       technologies: ['Python', 'TensorFlow', 'Django', 'Pandas', 'HTML/CSS'],
-      type: 'AI/ML'
+      type: 'AI/ML',
+      githubLink:'https://github.com/MariaSultanBahoo/Infectious-Disease-Prediction-Hotspot-Analysis'
     },
     {
       title: 'RAG on SQL Database',
-      duration: 'June 2025',
+      duration: 'June 2025 - In Progress',
       description: 'RAG pipeline using Gemini embeddings and FAISS for intelligent database querying with natural language.',
       technologies: ['Python', 'SQLite', 'FAISS', 'Gemini API', 'Streamlit'],
       type: 'AI/NLP'
@@ -88,7 +89,8 @@ const Index = () => {
       duration: 'April 2025 - May 2025',
       description: 'ESP32-CAM system with OpenCV for real-time sign language gesture recognition and text conversion.',
       technologies: ['ESP32-CAM', 'OpenCV', 'Python', 'Tkinter'],
-      type: 'IoT/CV'
+      type: 'IoT/CV',
+      githubLink:'https://github.com/MariaSultanBahoo/-Real-Time-Sign-Language-Recognition-using-ESP32-CAM-OpenCV'
     }
   ];
 
