@@ -425,14 +425,21 @@ const Index = () => {
                       </Badge>
                     ))}
                   </div>
-                  <Button 
+                  <a 
+                   href={project.githubLink} 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                    className="w-full"
+                   >
+                   <Button 
                     variant="outline" 
                     size="sm" 
                     className="w-full border-white/30 text-white hover:bg-white hover:text-black group-hover:scale-105 transition-all duration-300"
-                  >
+                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
                     View Details
-                  </Button>
+                   </Button>
+                  </a>
                 </CardContent>
               </Card>
             ))}
