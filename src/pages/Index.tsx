@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import axios from "axios";
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -45,16 +46,86 @@ const Index = () => {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear any previous status when user starts typing
+    if (submitStatus.type) {
+      setSubmitStatus({ type: null, message: '' });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please fill in all fields.'
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please enter a valid email address.'
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await axios.post('https://email-module.vercel.app/api/send-email', {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.data.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Message sent successfully! I\'ll get back to you soon.'
+        });
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        throw new Error(response.data.error || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: axios.isAxiosError(error) && error.response?.data?.error 
+          ? error.response.data.error 
+          : 'Failed to send message. Please try again or contact me directly.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const skills = [
@@ -616,10 +687,24 @@ const Index = () => {
             </div>
 
             {/* Contact Form */}
+
+ 
             <div className="lg:w-1/2">
               <Card className="bg-white/10 backdrop-blur-sm border-white/20">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold mb-6 text-blue-400">Send me a message</h3>
+                  
+                  {/* Status Message */}
+                  {submitStatus.message && (
+                    <div className={`mb-4 p-4 rounded-lg border ${
+                      submitStatus.type === 'success' 
+                        ? 'bg-green-500/20 border-green-500/30 text-green-300' 
+                        : 'bg-red-500/20 border-red-500/30 text-red-300'
+                    }`}>
+                      {submitStatus.message}
+                    </div>
+                  )}
+                  
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <Input
                       type="text"
@@ -628,6 +713,7 @@ const Index = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      disabled={isSubmitting}
                     />
                     <Input
                       type="email"
@@ -636,6 +722,7 @@ const Index = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      disabled={isSubmitting}
                     />
                     <Input
                       type="text"
@@ -644,6 +731,7 @@ const Index = () => {
                       value={formData.subject}
                       onChange={handleInputChange}
                       className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      disabled={isSubmitting}
                     />
                     <textarea
                       name="message"
@@ -651,10 +739,15 @@ const Index = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={4}
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      disabled={isSubmitting}
                     />
-                    <Button type="submit" className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
                     </Button>
                   </form>
                 </CardContent>
