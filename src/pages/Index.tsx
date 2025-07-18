@@ -301,7 +301,7 @@ const Index = () => {
             Maria Sultan
           </div>
           <div className="hidden md:flex space-x-8">
-            {['HOME', 'About', 'PROJECTS', 'SKILLS', 'CONTACT'].map((item, index) => (
+            {['HOME', 'ABOUT', 'PROJECTS', 'SKILLS', 'CONTACT'].map((item, index) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`} 
