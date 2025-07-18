@@ -324,7 +324,7 @@ const Index = () => {
 
       {/* Enhanced Hero Section with Earth Theme */}
       <section id="home" className="relative z-10 px-6 py-32 scroll-section">
-        <div className="max-w-7xl mx-auto">
+       <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="lg:w-1/2 mb-12 lg:mb-0">
               <div className="flex items-center space-x-2 mb-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
@@ -344,18 +344,19 @@ const Index = () => {
               </p>
               <div className="flex space-x-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
                 <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 hover:scale-105 transition-all duration-300 group">
-                  HIRE ME
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                 HIRE ME
+                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-black px-8 py-3 hover:scale-105 transition-all duration-300 group"
+                <a 
+                 href="/maria-sultan-cv.pdf" 
+                 download 
+                 className="border border-white text-white hover:bg-white hover:text-black px-8 py-3 hover:scale-105 transition-all duration-300 group flex items-center rounded-md"
                 >
-                  <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
-                  Download CV
-                </Button>
+                 <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
+                 Download CV
+                </a>
               </div>
-            </div>
+
             
             {/* Enhanced Earth-themed Floating Animation */}
             <div className="lg:w-1/2 flex justify-center">
@@ -380,6 +381,7 @@ const Index = () => {
             </div>
           </div>
         </div>
+      </div>
 
         {/* Enhanced Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
@@ -423,8 +425,8 @@ const Index = () => {
               <h2 className="text-4xl font-bold mb-6 text-blue-400 hover:text-cyan-400 transition-colors duration-300">About Me</h2>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
                 I'm Maria Sultan, a Software Engineering student with practical exposure to AI, 
-                embedded systems, and software development. I completed an AI internship at NESCOM, 
-                where I gained hands-on experience with deep learning, LLMs, and RAG systems.
+                embedded systems, and software development. I am doing an AI internship at Govt.(R&D) Organization, 
+                where I gain hands-on experience with deep learning, LLMs, and RAG systems.
               </p>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
                 My projects include RAG-based query systems using Gemini embeddings and FAISS, 
@@ -623,7 +625,7 @@ const Index = () => {
                 <div className="space-y-3">
                   <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300">
                     <CardContent className="p-4">
-                      <h4 className="font-semibold text-blue-400">AI Intern - NESCOM</h4>
+                      <h4 className="font-semibold text-blue-400">AI Intern - Govt.(R&D) Organization </h4>
                       <p className="text-sm text-gray-400 mb-2">April 2025 - June 2025</p>
                       <p className="text-gray-300 text-sm">Deep learning, LLMs, and RAG system implementation</p>
                     </CardContent>
