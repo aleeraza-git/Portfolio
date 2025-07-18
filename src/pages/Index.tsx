@@ -623,9 +623,8 @@ const Index = () => {
                 <div className="space-y-3">
                   <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300">
                     <CardContent className="p-4">
-                      <h4 className="font-semibold text-blue-400">AI Intern - Govt.(R&D) Organization </h4>
-                      <p className="text-sm text-gray-400 mb-2">July 2025 - Present</p>
-                      <p className="text-gray-300 text-sm">Deep learning, LLMs, and RAG system implementation</p>
+                      <h4 className="font-semibold text-blue-400">Youth Empowerment Cofounder</h4>
+                      <p className="text-gray-300 text-sm">Leading community initiatives to empower youth through technology</p>
                     </CardContent>
                   </Card>
                   <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300">
