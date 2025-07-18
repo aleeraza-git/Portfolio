@@ -141,19 +141,19 @@ const Index = () => {
 
   const projects = [
     {
+      title: 'RAG on SQL Database',
+      duration: 'June 2025 - In Progress',
+      description: 'RAG pipeline using Gemini embeddings and FAISS for intelligent database querying with natural language.',
+      technologies: ['Python', 'SQLite', 'FAISS', 'Gemini API', 'Streamlit'],
+      type: 'AI/NLP'
+    },
+     {
       title: 'Infectious Disease Prediction & Hotspot Analysis',
       duration: 'Nov 2024 - Jan 2025',
       description: 'Django-based web app using unsupervised autoencoder model and Apriori algorithm for disease hotspot prediction.',
       technologies: ['Python', 'TensorFlow', 'Django', 'Autoencoder'],
       type: 'AI/ML',
       githubLink:'https://github.com/MariaSultanBahoo/Infectious-Disease-Prediction-Hotspot-Analysis'
-    },
-    {
-      title: 'RAG on SQL Database',
-      duration: 'June 2025 - In Progress',
-      description: 'RAG pipeline using Gemini embeddings and FAISS for intelligent database querying with natural language.',
-      technologies: ['Python', 'SQLite', 'FAISS', 'Gemini API', 'Streamlit'],
-      type: 'AI/NLP'
     },
     {
       title: 'Real-time Sign Language Recognition',
