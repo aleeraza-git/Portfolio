@@ -144,7 +144,7 @@ const Index = () => {
       title: 'Infectious Disease Prediction & Hotspot Analysis',
       duration: 'Nov 2024 - Jan 2025',
       description: 'Django-based web app using unsupervised autoencoder model and Apriori algorithm for disease hotspot prediction.',
-      technologies: ['Python', 'TensorFlow', 'Django', 'Pandas', 'HTML/CSS'],
+      technologies: ['Python', 'TensorFlow', 'Django', 'Autoencoder'],
       type: 'AI/ML',
       githubLink:'https://github.com/MariaSultanBahoo/Infectious-Disease-Prediction-Hotspot-Analysis'
     },
@@ -167,6 +167,7 @@ const Index = () => {
 
   const certifications = [
     'Python Essentials (CISCO Networking Academy)',
+    'Decoding AI: A Deep Dive into AI Models and Predictions (Coursera)',
     'Basics of DataScience (Cambridge International)',
     'Python Programming (OpenWeaver)',
     'HTML/CSS Fundamentals (OpenWeaver)'
@@ -625,7 +626,7 @@ const Index = () => {
                   <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300">
                     <CardContent className="p-4">
                       <h4 className="font-semibold text-blue-400">AI Intern - Govt.(R&D) Organization </h4>
-                      <p className="text-sm text-gray-400 mb-2">April 2025 - June 2025</p>
+                      <p className="text-sm text-gray-400 mb-2">July 2025 - Present</p>
                       <p className="text-gray-300 text-sm">Deep learning, LLMs, and RAG system implementation</p>
                     </CardContent>
                   </Card>
