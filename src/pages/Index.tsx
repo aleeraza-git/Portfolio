@@ -343,10 +343,12 @@ const Index = () => {
                 deep learning, LLMs, and embedded systems. 🌍
               </p>
               <div className="flex space-x-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 hover:scale-105 transition-all duration-300 group">
-                 HIRE ME
-                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                </Button>
+                <a href="#contact">
+                  <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 hover:scale-105 transition-all duration-300 group">
+                    HIRE ME
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Button>
+                </a>
                 <a 
                  href="/maria_sultan.pdf" 
                  download 
@@ -425,7 +427,7 @@ const Index = () => {
               <h2 className="text-4xl font-bold mb-6 text-blue-400 hover:text-cyan-400 transition-colors duration-300">About Me</h2>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
                 I'm Maria Sultan, a Software Engineering student with practical exposure to AI, 
-                embedded systems, and software development. I am doing an AI internship at Govt.(R&D) Organization, 
+                embedded systems, and software development. I am doing an AI internship at Govt. (R&D) Organization, 
                 where I gain hands-on experience with deep learning, LLMs, and RAG systems.
               </p>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
@@ -443,10 +445,7 @@ const Index = () => {
                   Youth Empowerment Cofounder
                 </Badge>
               </div>
-              <Button className="bg-blue-600 hover:bg-blue-700 hover:scale-105 transition-all duration-300 group">
-                <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
-                Download Resume
-              </Button>
+
             </div>
           </div>
         </div>
