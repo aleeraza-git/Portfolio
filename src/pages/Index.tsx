@@ -129,11 +129,9 @@ const Index = () => {
   };
 
   const skills = [
-    { name: 'Python', level: 90, category: 'Programming' },
-    { name: 'AI/ML', level: 85, category: 'AI' },
-    { name: 'Java Spring Boot', level: 80, category: 'Backend' },
-    { name: 'C++', level: 85, category: 'Programming' },
-    { name: 'MySQL', level: 75, category: 'Database' },
+    { name: 'Python', level: 80, category: 'Programming' },
+    { name: 'AI/ML', level: 82, category: 'AI' },
+    { name: 'C++', level: 90, category: 'Programming' },
     { name: 'HTML/CSS/JS', level: 80, category: 'Frontend' },
     { name: 'OpenCV', level: 75, category: 'Computer Vision' },
     { name: 'Django', level: 70, category: 'Framework' }
