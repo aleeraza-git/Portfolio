@@ -348,7 +348,7 @@ const Index = () => {
                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
                 <a 
-                 href="/maria-sultan-cv.pdf" 
+                 href="/maria_sultan.pdf" 
                  download 
                  className="border border-white text-white hover:bg-white hover:text-black px-8 py-3 hover:scale-105 transition-all duration-300 group flex items-center rounded-md"
                 >
