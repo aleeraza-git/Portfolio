@@ -426,8 +426,8 @@ const Index = () => {
               <h2 className="text-4xl font-bold mb-6 text-blue-400 hover:text-cyan-400 transition-colors duration-300">About Me</h2>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
                 I'm Maria Sultan, a Software Engineering student with practical exposure to AI, 
-                embedded systems, and software development. I am doing an AI internship at Govt. (R&D) Organization, 
-                where I gain hands-on experience with deep learning, LLMs, and RAG systems.
+                embedded systems, and software development. I am currently doing an AI internship at a government R&D organization,
+                where I am gaining hands-on experience with deep learning, large language models (LLMs), and retrieval-augmented generation (RAG) systems..
               </p>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
                 My projects include RAG-based query systems using Gemini embeddings and FAISS, 
@@ -663,10 +663,6 @@ const Index = () => {
                   Feel free to reach out through any of the channels below.
                 </p>
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <Phone className="w-5 h-5 text-blue-400" />
-                    <span>+92 317 5268645</span>
-                  </div>
                   <div className="flex items-center space-x-3">
                     <Mail className="w-5 h-5 text-blue-400" />
                     <span>sultanmaria940@gmail.com</span>
