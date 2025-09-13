@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Mail, Phone, Github, Linkedin, ExternalLink, Calendar, MapPin, Award, Code, Database, Brain, Users, Trophy, GraduationCap, BookOpen, Briefcase, Star, ArrowRight, Download, ChevronDown, Globe, Sparkles } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Mail, Phone, Github, Linkedin, ExternalLink, Calendar, MapPin, Award, Code, Database, Brain, Users, Trophy, GraduationCap, BookOpen, Briefcase, Star, ArrowRight, Download, ChevronDown, Globe, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,6 +9,9 @@ import axios from "axios";
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +39,46 @@ const Index = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  // Projects carousel controls
+  const updateCarouselScrollButtons = () => {
+    const container = carouselRef.current;
+    if (!container) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
+  };
+
+  const scrollCarouselByViewport = (direction: 'left' | 'right') => {
+    const container = carouselRef.current;
+    if (!container) return;
+    const amount = direction === 'left' ? -container.clientWidth : container.clientWidth;
+    container.scrollBy({ left: amount, behavior: 'smooth' });
+    // Schedule an update after the smooth scroll
+    window.setTimeout(updateCarouselScrollButtons, 350);
+  };
+
+  useEffect(() => {
+    updateCarouselScrollButtons();
+    const container = carouselRef.current;
+    if (!container) return;
+    const handleScroll = () => updateCarouselScrollButtons();
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    const handleResize = () => updateCarouselScrollButtons();
+    window.addEventListener('resize', handleResize);
+    // Keyboard navigation
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement && (document.activeElement as HTMLElement).tagName === 'INPUT') return;
+      if (e.key === 'ArrowLeft') scrollCarouselByViewport('left');
+      if (e.key === 'ArrowRight') scrollCarouselByViewport('right');
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      container.removeEventListener('scroll', handleScroll as EventListener);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
@@ -129,54 +172,69 @@ const Index = () => {
   };
 
   const skills = [
-    { name: 'Python', level: 80, category: 'Programming' },
-    { name: 'AI/ML', level: 82, category: 'AI' },
+    { name: 'Python', level: 85, category: 'Programming' },
+    { name: 'AI/ML', level: 88, category: 'AI' },
+    { name: 'Agentic RAG', level: 85, category: 'AI' },
+    { name: 'LLMs', level: 82, category: 'AI' },
+    { name: 'Gen AI', level: 80, category: 'AI' },
     { name: 'C++', level: 90, category: 'Programming' },
     { name: 'HTML/CSS/JS', level: 80, category: 'Frontend' },
     { name: 'OpenCV', level: 75, category: 'Computer Vision' },
-    { name: 'Django', level: 70, category: 'Framework' }
+    { name: 'Django', level: 70, category: 'Framework' },
+    { name: 'LangChain', level: 78, category: 'AI Framework' },
+    { name: 'TensorFlow', level: 80, category: 'ML Framework' },
+    { name: 'Pandas', level: 85, category: 'Data Science' }
   ];
 
   const projects = [
     {
-      title: 'RAG on SQL Database',
-      duration: 'June 2025 - In Progress',
-      description: 'RAG pipeline using Gemini embeddings and FAISS for intelligent database querying with natural language.',
-      technologies: ['Python', 'SQLite', 'FAISS', 'Gemini API', 'Streamlit'],
-      type: 'AI/NLP'
+      title: 'Multi-Agent SQL Assistant using Agentic RAG Architecture',
+      duration: 'July 2025 - August 2025',
+      description: 'Built a Retrieval-Augmented Generation (RAG) system with multi-agent LLM workflow to answer natural language queries over product databases without manual SQL writing. Designed autonomous agents for SQL generation, query validation, and result summarization.',
+      technologies: ['Python', 'Groq (LLAMA3-70B)', 'LangChain', 'Streamlit', 'SQLite', 'Pandas'],
+      type: 'AI/RAG',
+      githubLink: 'https://github.com/MariaSultanBahoo/Multi-Agent-SQL-Assistant'
     },
-     {
+    {
+      title: 'FJWU Prospectus Q&A Chatbot (RAG-based)',
+      duration: 'July 2025 - August 2025',
+      description: 'Developed a semantic search system using Sentence-Transformers and FAISS for retrieving relevant document chunks. Integrated Groq\'s LLAMA3-8B model via LangChain for context-aware answer generation.',
+      technologies: ['Python', 'Groq (LLAMA3-8B)', 'LangChain', 'Sentence-Transformers', 'FAISS', 'Streamlit', 'PDF (PyMuPDF)'],
+      type: 'AI/RAG',
+      githubLink: 'https://github.com/MariaSultanBahoo/fjwu_admission_chatbot'
+    },
+    {
       title: 'Infectious Disease Prediction & Hotspot Analysis',
-      duration: 'Nov 2024 - Jan 2025',
-      description: 'Django-based web app using unsupervised autoencoder model and Apriori algorithm for disease hotspot prediction.',
-      technologies: ['Python', 'TensorFlow', 'Django', 'Autoencoder'],
+      duration: 'November 2024 - January 2025',
+      description: 'Developed a Django-based web application to predict disease hotspots using an unsupervised autoencoder model. Applied the Apriori algorithm for association rule mining to identify patterns in disease spread.',
+      technologies: ['Python', 'TensorFlow', 'Pandas', 'Django', 'HTML/CSS', 'Autoencoder', 'Apriori'],
       type: 'AI/ML',
-      githubLink:'https://github.com/MariaSultanBahoo/Infectious-Disease-Prediction-Hotspot-Analysis'
+      githubLink: 'https://github.com/MariaSultanBahoo/Infectious-Disease-Prediction-Hotspot-Analysis'
     },
     {
       title: 'Real-time Sign Language Recognition',
       duration: 'April 2025 - May 2025',
-      description: 'ESP32-CAM system with OpenCV for real-time sign language gesture recognition and text conversion.',
+      description: 'Developed a real-time sign language recognition system that uses an ESP32-CAM module and OpenCV with MediaPipe in Python. It detects hand gestures (like OK, Stop, Victory, etc.) and gives audio feedback using text-to-speech. A custom Tkinter GUI displays the video feed and current gesture.',
       technologies: ['ESP32-CAM', 'OpenCV', 'Python', 'Tkinter'],
       type: 'IoT/CV',
-      githubLink:'https://github.com/MariaSultanBahoo/-Real-Time-Sign-Language-Recognition-using-ESP32-CAM-OpenCV'
+      githubLink: 'https://github.com/MariaSultanBahoo/-Real-Time-Sign-Language-Recognition-using-ESP32-CAM-OpenCV'
     }
   ];
 
   const certifications = [
-    'Python Essentials (CISCO Networking Academy)',
+    'AI Agents: From Prompts to Multi-Agent Systems (Coursera)',
     'Decoding AI: A Deep Dive into AI Models and Predictions (Coursera)',
-    'Basics of DataScience (Cambridge International)',
-    'Python Programming (OpenWeaver)',
-    'HTML/CSS Fundamentals (OpenWeaver)'
+    'Google AI Essentials V1 (Coursera)',
+    'Introduction to AI (Google)',
+    'Python Essentials (CISCO Networking Academy)'
   ];
 
   const education = [
     {
       degree: 'Bachelor of Science in Software Engineering',
-      institution: 'Fatima Jinnah Women University, Rawalpindi',
+      institution: 'Fatima Jinnah Women University, The Mall Road, Rawalpindi',
       duration: 'Nov 2022 - Present',
-      cgpa: '3.45'
+      cgpa: '3.43'
     },
     {
       degree: 'Intermediate in Computer Science',
@@ -189,6 +247,27 @@ const Index = () => {
       institution: 'F.G Girls Public High School, Rawalpindi',
       duration: 'Oct 2017 - July 2020',
       percentage: '86%'
+    }
+  ];
+
+  const experience = [
+    {
+      position: 'Artificial Intelligence Intern',
+      company: 'NESCOM - Islamabad',
+      duration: 'May 2025 - August 2025',
+      location: 'Islamabad, Pakistan (Hybrid)',
+      description: 'Explored LLMs and deep learning concepts with hands-on implementation. Built a multi-agent RAG system using LangChain, Streamlit, and Groq\'s LLAMA3-70B for SQL-based querying.',
+      technologies: ['Python', 'LangChain', 'Groq LLAMA3-70B', 'Streamlit', 'RAG', 'Deep Learning'],
+      type: 'Internship'
+    },
+    {
+      position: 'Artificial Intelligence Intern',
+      company: 'NUTECH Innovation Center',
+      duration: 'July 2025 - August 2025',
+      location: 'Islamabad, Pakistan (On-site)',
+      description: 'Developed an AI-powered admission chatbot using a RAG pipeline with LangChain and Groq LLMs. Engineered and deployed an LLM-based grammar and tense corrector web app. Built a social media emotion predictor using Hugging Face Transformers.',
+      technologies: ['Python', 'LangChain', 'Groq LLMs', 'Hugging Face', 'RAG', 'Streamlit', 'Transformers'],
+      type: 'Internship'
     }
   ];
 
@@ -299,7 +378,7 @@ const Index = () => {
             Maria Sultan
           </div>
           <div className="hidden md:flex space-x-8">
-            {['HOME', 'ABOUT', 'PROJECTS', 'SKILLS', 'CONTACT'].map((item, index) => (
+            {['HOME', 'ABOUT', 'PROJECTS', 'SKILLS', 'EXPERIENCE', 'CONTACT'].map((item, index) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`} 
@@ -331,15 +410,21 @@ const Index = () => {
                 <span className="text-gray-300">Rawalpindi, Pakistan</span>
                 <Globe className="w-4 h-4 text-green-400 animate-spin-slow" />
               </div>
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                <span className="inline-block hover:scale-105 transition-transform duration-300">Software Engineer</span><br />
-                <span className="text-blue-400 inline-block hover:scale-105 transition-transform duration-300 hover:text-cyan-400">Maria Sultan</span><br />
-                <span className="inline-block hover:scale-105 transition-transform duration-300 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">AI & Tech Enthusiast</span>
+              <h1 className="leading-tight mb-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <div className="text-2xl lg:text-3xl font-semibold mb-2 text-gray-300 hover:text-white transition-colors duration-300">
+                  AI/ML Engineer
+                </div>
+                <div className="text-5xl lg:text-7xl font-bold text-blue-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-105 transform">
+                  Maria Sultan
+                </div>
+                <div className="text-xl lg:text-2xl font-medium bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
+                  RAG & LLM Developer
+                </div>
               </h1>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '0.6s' }}>
                 Passionate about AI, Machine Learning, and Software Development. 
                 Currently pursuing Software Engineering with hands-on experience in 
-                deep learning, LLMs, and embedded systems. 🌍
+                LLMs, RAG pipelines, and chatbot systems from internships at NESCOM and NUTECH. 🌍
               </p>
               <div className="flex space-x-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
                 <a href="#contact">
@@ -425,14 +510,14 @@ const Index = () => {
             <div className="lg:w-1/2 lg:pl-12">
               <h2 className="text-4xl font-bold mb-6 text-blue-400 hover:text-cyan-400 transition-colors duration-300">About Me</h2>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
-                I'm Maria Sultan, a Software Engineering student with practical exposure to AI, 
-                embedded systems, and software development. I am currently doing an AI internship at a government R&D organization,
-                where I am gaining hands-on experience with deep learning, large language models (LLMs), and retrieval-augmented generation (RAG) systems..
+                I'm Maria Sultan, a Software Engineering student with hands-on experience in AI and natural language processing. 
+                I specialize in LLMs, RAG pipelines, and chatbot systems, gained from internships at NESCOM and NUTECH Innovation Center.
+                I'm passionate about building practical, data-driven solutions for real-world problems.
               </p>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
-                My projects include RAG-based query systems using Gemini embeddings and FAISS, 
-                and an ESP32-CAM Sign Language to Text Converter using OpenCV and Python. 
-                I'm passionate about applying AI to solve real-world problems.
+                My key projects include a Multi-Agent SQL Assistant using Agentic RAG Architecture, 
+                an FJWU Prospectus Q&A Chatbot with semantic search capabilities, and an Infectious Disease Prediction system. 
+                I'm proficient in Python, TensorFlow, PyTorch, Autoencoders, and Pandas.
               </p>
               <div className="flex flex-wrap gap-4 mb-6">
                 <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 hover:scale-105 transition-all duration-300 hover:bg-blue-600/30">
@@ -461,11 +546,38 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300">Featured Projects</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="relative">
+            <button
+              aria-label="Previous projects"
+              onClick={() => scrollCarouselByViewport('left')}
+              disabled={!canScrollLeft}
+              className={`hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/20 backdrop-blur bg-black/30 hover:bg-black/50 transition ${!canScrollLeft ? 'opacity-40 cursor-not-allowed' : 'opacity-100'}`}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              aria-label="Next projects"
+              onClick={() => scrollCarouselByViewport('right')}
+              disabled={!canScrollRight}
+              className={`hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/20 backdrop-blur bg-black/30 hover:bg-black/50 transition ${!canScrollRight ? 'opacity-40 cursor-not-allowed' : 'opacity-100'}`}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            <div
+              ref={carouselRef}
+              role="region"
+              aria-label="Projects carousel"
+              className="flex gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth px-1 pb-2 scrollbar-hide"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+            >
             {projects.map((project, index) => (
               <Card 
                 key={index} 
-                className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-500 group hover:scale-105 hover:-translate-y-2"
+                  className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-500 group hover:scale-105 hover:-translate-y-2 snap-start shrink-0 w-[85vw] md:w-[48%] lg:w-[32%]"
                 style={{
                   animationDelay: `${index * 0.2}s`,
                   transform: `translateY(${scrollY * 0.02}px)`
@@ -514,6 +626,7 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+            </div>
           </div>
         </div>
       </section>
@@ -565,75 +678,145 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Education & Experience Section */}
+      {/* Experience Section */}
+      <section 
+        id="experience" 
+        className="relative z-10 px-6 py-20 scroll-section"
+        style={{
+          transform: `translateY(${scrollY * 0.03}px)`
+        }}
+      >
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300">Professional Experience</h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {experience.map((exp, index) => (
+              <Card 
+                key={index} 
+                className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-500 group hover:scale-105 hover:-translate-y-2"
+                style={{
+                  animationDelay: `${index * 0.2}s`,
+                  transform: `translateY(${scrollY * 0.02}px)`
+                }}
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <Badge className="bg-green-600/20 text-green-300 border-green-600/30 group-hover:scale-110 transition-all duration-300">
+                      {exp.type}
+                    </Badge>
+                    <Calendar className="w-4 h-4 text-gray-400 group-hover:text-green-400 transition-colors duration-300" />
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-green-400 transition-colors duration-300">
+                    {exp.position}
+                  </h3>
+                  
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-blue-400" />
+                    <span className="text-blue-400 font-medium">{exp.company}</span>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2 mb-3">
+                    <MapPin className="w-4 h-4 text-gray-400" />
+                    <span className="text-gray-400 text-sm">{exp.location}</span>
+                  </div>
+                  
+                  <p className="text-gray-400 text-sm mb-3">{exp.duration}</p>
+                  
+                  <p className="text-gray-300 mb-4 leading-relaxed group-hover:text-white transition-colors duration-300">
+                    {exp.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech, techIndex) => (
+                      <Badge 
+                        key={techIndex} 
+                        variant="outline" 
+                        className="border-white/30 text-white/80 text-xs hover:scale-105 transition-all duration-300 hover:border-green-400/50"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
       <section className="relative z-10 px-6 py-20 scroll-section">
         <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300 flex items-center justify-center">
+            <GraduationCap className="w-8 h-8 mr-3" />
+            Education
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {education.map((edu, index) => (
+              <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-2">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors duration-300">{edu.degree}</h3>
+                  <p className="text-blue-400 mb-2">{edu.institution}</p>
+                  <p className="text-gray-400 text-sm mb-2">{edu.duration}</p>
+                  <p className="text-green-400 font-semibold">
+                    {edu.cgpa ? `CGPA: ${edu.cgpa}` : `Percentage: ${edu.percentage}`}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications & Leadership Section */}
+      <section className="relative z-10 px-6 py-20 scroll-section">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300 flex items-center justify-center">
+            <Trophy className="w-8 h-8 mr-3" />
+            Achievements & Certifications
+          </h2>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Education */}
+            {/* Certifications */}
             <div>
-              <h2 className="text-3xl font-bold mb-8 text-blue-400 flex items-center">
-                <GraduationCap className="w-8 h-8 mr-3" />
-                Education
-              </h2>
-              <div className="space-y-6">
-                {education.map((edu, index) => (
-                  <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300">
-                    <CardContent className="p-6">
-                      <h3 className="text-lg font-semibold mb-2">{edu.degree}</h3>
-                      <p className="text-blue-400 mb-2">{edu.institution}</p>
-                      <p className="text-gray-400 text-sm mb-2">{edu.duration}</p>
-                      <p className="text-green-400 font-semibold">
-                        {edu.cgpa ? `CGPA: ${edu.cgpa}` : `Percentage: ${edu.percentage}`}
-                      </p>
+              <h3 className="text-2xl font-semibold mb-8 flex items-center text-yellow-400">
+                <Award className="w-6 h-6 mr-3" />
+                Certifications
+              </h3>
+              <div className="space-y-4">
+                {certifications.map((cert, index) => (
+                  <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-1">
+                    <CardContent className="p-4">
+                      <div className="flex items-center">
+                        <BookOpen className="w-5 h-5 mr-3 text-blue-400 group-hover:text-yellow-400 transition-colors duration-300" />
+                        <span className="text-gray-300 group-hover:text-white transition-colors duration-300">{cert}</span>
+                      </div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             </div>
 
-            {/* Certifications & Leadership */}
+            {/* Leadership & Community */}
             <div>
-              <h2 className="text-3xl font-bold mb-8 text-blue-400 flex items-center">
-                <Trophy className="w-8 h-8 mr-3" />
-                Achievements
-              </h2>
-              
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <Award className="w-5 h-5 mr-2 text-yellow-400" />
-                  Certifications
-                </h3>
-                <div className="space-y-3">
-                  {certifications.map((cert, index) => (
-                    <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20 hover:scale-105 transition-all duration-300">
-                      <div className="flex items-center">
-                        <BookOpen className="w-4 h-4 mr-3 text-blue-400" />
-                        <span className="text-gray-300">{cert}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <Users className="w-5 h-5 mr-2 text-green-400" />
-                  Leadership & Community
-                </h3>
-                <div className="space-y-3">
-                  <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300">
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold text-blue-400">Youth Empowerment Cofounder</h4>
-                      <p className="text-gray-300 text-sm">Leading community initiatives to empower youth through technology</p>
-                    </CardContent>
-                  </Card>
-                  <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300">
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold text-purple-400">BETA MLSA - Microsoft</h4>
-                      <p className="text-gray-300 text-sm">Student Ambassador facilitating tech community collaboration</p>
-                    </CardContent>
-                  </Card>
-                </div>
+              <h3 className="text-2xl font-semibold mb-8 flex items-center text-green-400">
+                <Users className="w-6 h-6 mr-3" />
+                Leadership & Community
+              </h3>
+              <div className="space-y-4">
+                <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-1">
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold text-blue-400 group-hover:text-green-400 transition-colors duration-300 mb-2">Youth Empowerment Cofounder</h4>
+                    <p className="text-gray-300 text-sm group-hover:text-white transition-colors duration-300">Leading community initiatives to empower youth through technology</p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-1">
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold text-purple-400 group-hover:text-green-400 transition-colors duration-300 mb-2">BETA MLSA - Microsoft</h4>
+                    <p className="text-gray-300 text-sm group-hover:text-white transition-colors duration-300">Student Ambassador facilitating tech community collaboration</p>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
@@ -762,7 +945,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex space-x-8 mb-6 md:mb-0">
-              {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((item, index) => (
+              {['Home', 'About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item, index) => (
                 <a 
                   key={item}
                   href={`#${item.toLowerCase()}`} 
