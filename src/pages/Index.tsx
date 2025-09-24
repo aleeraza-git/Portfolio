@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, Github, Linkedin, ExternalLink, Calendar, MapPin, Award, Code, Database, Brain, Users, Trophy, GraduationCap, BookOpen, Briefcase, Star, ArrowRight, Download, ChevronDown, Globe, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, ExternalLink, Calendar, MapPin, Award, Code, Database, Brain, Users, Trophy, GraduationCap, BookOpen, Briefcase, Star, ArrowRight, Download, ChevronDown, Globe, Sparkles, ChevronLeft, ChevronRight, Server, Wifi } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -172,107 +172,125 @@ const Index = () => {
   };
 
   const skills = [
-    { name: 'Python', level: 85, category: 'Programming' },
-    { name: 'AI/ML', level: 88, category: 'AI' },
-    { name: 'Agentic RAG', level: 85, category: 'AI' },
-    { name: 'LLMs', level: 82, category: 'AI' },
-    { name: 'Gen AI', level: 80, category: 'AI' },
-    { name: 'C++', level: 90, category: 'Programming' },
-    { name: 'HTML/CSS/JS', level: 80, category: 'Frontend' },
-    { name: 'OpenCV', level: 75, category: 'Computer Vision' },
-    { name: 'Django', level: 70, category: 'Framework' },
-    { name: 'LangChain', level: 78, category: 'AI Framework' },
-    { name: 'TensorFlow', level: 80, category: 'ML Framework' },
-    { name: 'Pandas', level: 85, category: 'Data Science' }
+    { name: 'TCP/IP', level: 90, category: 'Networking' },
+    { name: 'Routing Protocols (IGP & EGP)', level: 85, category: 'Networking' },
+    { name: 'Switching', level: 88, category: 'Networking' },
+    { name: 'Network Security', level: 86, category: 'Security' },
+    { name: 'High Availability', level: 80, category: 'Networking' },
+    { name: 'Troubleshooting', level: 90, category: 'Operations' },
+    { name: 'Layer 3 VPN (IPSec)', level: 78, category: 'Security' },
+    { name: 'Microsoft Azure', level: 75, category: 'Cloud' },
+    { name: 'AWS Cloud', level: 70, category: 'Cloud' },
+    { name: 'Virtualization', level: 78, category: 'Systems' },
+    { name: 'Windows Server & AD', level: 82, category: 'Systems' },
+    { name: 'Backup & M365', level: 80, category: 'Systems' },
+    { name: 'Linux & Shell', level: 75, category: 'Systems' },
+    { name: 'Fortinet/Palo Alto', level: 76, category: 'Firewalls' }
   ];
 
-  const projects = [
-    {
-      title: 'Multi-Agent SQL Assistant using Agentic RAG Architecture',
-      duration: 'July 2025 - August 2025',
-      description: 'Built a Retrieval-Augmented Generation (RAG) system with multi-agent LLM workflow to answer natural language queries over product databases without manual SQL writing. Designed autonomous agents for SQL generation, query validation, and result summarization.',
-      technologies: ['Python', 'Groq (LLAMA3-70B)', 'LangChain', 'Streamlit', 'SQLite', 'Pandas'],
-      type: 'AI/RAG',
-      githubLink: 'https://github.com/MariaSultanBahoo/Multi-Agent-SQL-Assistant'
-    },
-    {
-      title: 'FJWU Prospectus Q&A Chatbot (RAG-based)',
-      duration: 'July 2025 - August 2025',
-      description: 'Developed a semantic search system using Sentence-Transformers and FAISS for retrieving relevant document chunks. Integrated Groq\'s LLAMA3-8B model via LangChain for context-aware answer generation.',
-      technologies: ['Python', 'Groq (LLAMA3-8B)', 'LangChain', 'Sentence-Transformers', 'FAISS', 'Streamlit', 'PDF (PyMuPDF)'],
-      type: 'AI/RAG',
-      githubLink: 'https://github.com/MariaSultanBahoo/fjwu_admission_chatbot'
-    },
-    {
-      title: 'Infectious Disease Prediction & Hotspot Analysis',
-      duration: 'November 2024 - January 2025',
-      description: 'Developed a Django-based web application to predict disease hotspots using an unsupervised autoencoder model. Applied the Apriori algorithm for association rule mining to identify patterns in disease spread.',
-      technologies: ['Python', 'TensorFlow', 'Pandas', 'Django', 'HTML/CSS', 'Autoencoder', 'Apriori'],
-      type: 'AI/ML',
-      githubLink: 'https://github.com/MariaSultanBahoo/Infectious-Disease-Prediction-Hotspot-Analysis'
-    },
-    {
-      title: 'Real-time Sign Language Recognition',
-      duration: 'April 2025 - May 2025',
-      description: 'Developed a real-time sign language recognition system that uses an ESP32-CAM module and OpenCV with MediaPipe in Python. It detects hand gestures (like OK, Stop, Victory, etc.) and gives audio feedback using text-to-speech. A custom Tkinter GUI displays the video feed and current gesture.',
-      technologies: ['ESP32-CAM', 'OpenCV', 'Python', 'Tkinter'],
-      type: 'IoT/CV',
-      githubLink: 'https://github.com/MariaSultanBahoo/-Real-Time-Sign-Language-Recognition-using-ESP32-CAM-OpenCV'
-    }
-  ];
+  // Projects section removed per user request
 
   const certifications = [
-    'AI Agents: From Prompts to Multi-Agent Systems (Coursera)',
-    'Decoding AI: A Deep Dive into AI Models and Predictions (Coursera)',
-    'Google AI Essentials V1 (Coursera)',
-    'Introduction to AI (Google)',
-    'Python Essentials (CISCO Networking Academy)'
+    'Google IT Support (Coursera)',
+    'Google Cybersecurity Specialization (Coursera)',
+    'Microsoft Certified: Azure Administrator Associate',
+    'Fortinet NSE 1, 2, 3'
   ];
 
-  const education = [
+  const education: Array<{ degree: string; institution: string; duration: string; cgpa?: string; percentage?: string }> = [
     {
-      degree: 'Bachelor of Science in Software Engineering',
-      institution: 'Fatima Jinnah Women University, The Mall Road, Rawalpindi',
-      duration: 'Nov 2022 - Present',
-      cgpa: '3.43'
-    },
-    {
-      degree: 'Intermediate in Computer Science',
-      institution: 'Global College System, Rawalpindi',
-      duration: 'July 2020 - July 2022',
-      percentage: '84%'
-    },
-    {
-      degree: 'Matriculation in Computer Science',
-      institution: 'F.G Girls Public High School, Rawalpindi',
-      duration: 'Oct 2017 - July 2020',
-      percentage: '86%'
+      degree: 'Bachelor of Science in Computer Science',
+      institution: 'University of Agriculture, Peshawar, KPK',
+      duration: 'Nov 2021 - Jun 2025',
+      cgpa: '3.05/4.00'
     }
   ];
 
   const experience = [
     {
-      position: 'Artificial Intelligence Intern',
-      company: 'NESCOM - Islamabad',
-      duration: 'May 2025 - August 2025',
-      location: 'Islamabad, Pakistan (Hybrid)',
-      description: 'Explored LLMs and deep learning concepts with hands-on implementation. Built a multi-agent RAG system using LangChain, Streamlit, and Groq\'s LLAMA3-70B for SQL-based querying.',
-      technologies: ['Python', 'LangChain', 'Groq LLAMA3-70B', 'Streamlit', 'RAG', 'Deep Learning'],
+      position: 'Network Support Engineer',
+      company: 'IMARAT',
+      duration: '09/2025 – Current',
+      location: 'Islamabad, ICT',
+      description: 'Plan, deploy and maintain reliable network infrastructure across multiple office locations; configure Cisco PoE switches, UniFi APs, USG Pro 4 and FortiGate NGFWs; implement security best practices; design high-density UniFi Wi‑Fi; monitor, analyze and troubleshoot performance to reduce downtime; collaborate with IT for scalable deployments; document topologies, policies and procedures.',
+      technologies: ['Cisco PoE Switches', 'UniFi APs/USG Pro 4', 'FortiGate NGFW', 'Wi‑Fi Design', 'Monitoring'],
+      type: 'Full-time'
+    },
+    {
+      position: 'Information Technology Intern',
+      company: 'Graana.com',
+      duration: '07/2025 – 09/2025',
+      location: 'Lahore, Punjab',
+      description: 'Troubleshot hardware, software and network issues for end users; monitored network performance; configured Ubiquiti USG, firewall policies and access controls; handled help desk tickets and technical resolutions; supported biometric device operations; assisted in infrastructure maintenance, optimization and QoS settings.',
+      technologies: ['Ubiquiti USG', 'Firewalls & ACLs', 'Helpdesk', 'QoS', 'Windows'],
       type: 'Internship'
     },
     {
-      position: 'Artificial Intelligence Intern',
-      company: 'NUTECH Innovation Center',
-      duration: 'July 2025 - August 2025',
-      location: 'Islamabad, Pakistan (On-site)',
-      description: 'Developed an AI-powered admission chatbot using a RAG pipeline with LangChain and Groq LLMs. Engineered and deployed an LLM-based grammar and tense corrector web app. Built a social media emotion predictor using Hugging Face Transformers.',
-      technologies: ['Python', 'LangChain', 'Groq LLMs', 'Hugging Face', 'RAG', 'Streamlit', 'Transformers'],
+      position: 'IT Support & System Admin',
+      company: 'Khired Networks',
+      duration: '06/2025 – 07/2025',
+      location: 'Lahore, Punjab',
+      description: 'Managed and resolved ITAM tickets; delivered hands‑on support for laptops/desktops and peripherals; diagnosed hardware, software and network connectivity issues; collaborated with the IT team to maintain uptime and streamline daily operations.',
+      technologies: ['ITAM', 'Windows', 'End‑User Support', 'Troubleshooting'],
+      type: 'Internship'
+    },
+    {
+      position: 'Network Operations Center (NOC) Intern',
+      company: 'Nadra',
+      duration: '07/2024 – 08/2024',
+      location: 'Peshawar, KPK',
+      description: 'Deployed and configured network for a new facility achieving 100% connectivity during setup; tested and troubleshot components, maintaining 99.9% operational uptime; organized racks and cabling for 30% space optimization; configured and troubleshot routers, switches and firewalls for a 15% security/performance gain; provided support to 30+ users with 95% satisfaction.',
+      technologies: ['Routers', 'Switches', 'Firewalls', 'Racks & Cabling', 'Monitoring'],
       type: 'Internship'
     }
   ];
 
+  const trainings: Array<{
+    title: string;
+    provider: string;
+    location: string;
+    duration: string;
+    focusAreas: string[];
+  }> = [
+    {
+      title: 'Cyber Security',
+      provider: 'Corvit Systems Peshawar',
+      location: 'Peshawar, KPK',
+      duration: '03/2024 – 06/2024',
+      focusAreas: [
+        'Network Security',
+        'Ethical Hacking',
+        'Threat Detection',
+        'Risk Management',
+        'Security Protocols'
+      ]
+    },
+    {
+      title: 'Cloud Computing',
+      provider: 'Corvit Systems Peshawar',
+      location: 'Peshawar, KPK',
+      duration: '05/2023 – 12/2023',
+      focusAreas: [
+        'AWS',
+        'Azure',
+        'Windows Server Administration',
+        'VMware vSphere'
+      ]
+    },
+    {
+      title: 'Networking',
+      provider: 'Corvit Systems Peshawar',
+      location: 'Peshawar, KPK',
+      duration: '05/2023 – 09/2023',
+      focusAreas: [
+        'CCNA',
+        'CCNP Routing and Switching'
+      ]
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-neutral-900 text-white relative overflow-hidden">
       {/* Enhanced Earth and Space Background */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Floating Earth Illustration */}
@@ -373,16 +391,16 @@ const Index = () => {
         }}
       >
         <nav className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="text-xl font-bold animate-fade-in hover:text-blue-400 transition-colors duration-300 flex items-center">
-            <Sparkles className="w-6 h-6 mr-2 text-blue-400" />
-            Maria Sultan
+          <div className="text-xl font-bold animate-fade-in hover:text-cyan-400 transition-colors duration-300 flex items-center">
+            <Server className="w-6 h-6 mr-2 text-cyan-400" />
+            Ali Raza
           </div>
           <div className="hidden md:flex space-x-8">
-            {['HOME', 'ABOUT', 'PROJECTS', 'SKILLS', 'EXPERIENCE', 'CONTACT'].map((item, index) => (
+            {['HOME', 'ABOUT','SKILLS', 'EXPERIENCE', 'CONTACT'].map((item, index) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`} 
-                className="hover:text-blue-400 transition-all duration-300 hover:scale-110 relative group smooth-scroll"
+                className="hover:text-cyan-400 transition-all duration-300 hover:scale-110 relative group smooth-scroll"
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -393,7 +411,7 @@ const Index = () => {
                 }}
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
           </div>
@@ -406,35 +424,32 @@ const Index = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="lg:w-1/2 mb-12 lg:mb-0">
               <div className="flex items-center space-x-2 mb-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <MapPin className="w-5 h-5 text-blue-400 animate-pulse" />
-                <span className="text-gray-300">Rawalpindi, Pakistan</span>
-                <Globe className="w-4 h-4 text-green-400 animate-spin-slow" />
+                <MapPin className="w-5 h-5 text-cyan-400 animate-pulse" />
+                <span className="text-gray-300">Islamabad, Pakistan</span>
+                <Wifi className="w-4 h-4 text-green-400" />
               </div>
               <h1 className="leading-tight mb-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
                 <div className="text-2xl lg:text-3xl font-semibold mb-2 text-gray-300 hover:text-white transition-colors duration-300">
-                  AI/ML Engineer
+                  Network & Security Engineer
                 </div>
                 <div className="text-5xl lg:text-7xl font-bold text-blue-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-105 transform">
-                  Maria Sultan
-                </div>
-                <div className="text-xl lg:text-2xl font-medium bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
-                  RAG & LLM Developer
+                  Ali Raza
                 </div>
               </h1>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                Passionate about AI, Machine Learning, and Software Development. 
-                Currently pursuing Software Engineering with hands-on experience in 
-                LLMs, RAG pipelines, and chatbot systems from internships at NESCOM and NUTECH. 🌍
+                Dedicated network security professional with experience designing, deploying and safeguarding network infrastructures.
+                Comfortable across routing/switching, VPNs, firewalls (Fortinet/Palo Alto), Windows Server/AD and Azure administration.
+                Keen to contribute both operational excellence and technical expertise to resilient infrastructures. 🌍
               </p>
               <div className="flex space-x-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
                 <a href="#contact">
-                  <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 hover:scale-105 transition-all duration-300 group">
+                  <Button className="bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-700 hover:to-emerald-700 px-8 py-3 hover:scale-105 transition-all duration-300 group">
                     HIRE ME
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
                 </a>
                 <a 
-                 href="/maria_sultan.pdf" 
+                 href="/ali_raza.pdf" 
                  download 
                  className="border border-white text-white hover:bg-white hover:text-black px-8 py-3 hover:scale-105 transition-all duration-300 group flex items-center rounded-md"
                 >
@@ -448,20 +463,20 @@ const Index = () => {
             <div className="lg:w-1/2 flex justify-center">
               <div className="relative group">
                 <div 
-                  className="w-80 h-80 bg-gradient-to-br from-blue-400/20 to-green-400/10 rounded-full blur-sm animate-pulse hover:scale-110 transition-all duration-500"
+                  className="w-80 h-80 bg-gradient-to-br from-cyan-400/20 to-emerald-400/10 rounded-full blur-sm animate-pulse hover:scale-110 transition-all duration-500"
                   style={{
                     transform: `rotate(${scrollY * 0.1}deg) scale(${1 + mousePosition.x * 0.0001})`
                   }}
                 ></div>
                 <div 
-                  className="absolute top-10 left-10 w-60 h-60 bg-gradient-to-br from-green-400/30 to-blue-400/20 rounded-full animate-spin transition-all duration-500 group-hover:animate-pulse"
+                  className="absolute top-10 left-10 w-60 h-60 bg-gradient-to-br from-emerald-400/30 to-cyan-400/20 rounded-full animate-spin transition-all duration-500 group-hover:animate-pulse"
                   style={{ 
                     animationDuration: '20s',
                     transform: `scale(${1 + mousePosition.y * 0.0001})`
                   }}
                 ></div>
                 <div className="absolute top-20 left-20 w-40 h-40 bg-white/20 rounded-full flex items-center justify-center hover:rotate-12 transition-all duration-300">
-                  <Globe className="w-16 h-16 text-blue-400 hover:text-green-400 transition-colors duration-300" />
+                  <Server className="w-16 h-16 text-cyan-400 hover:text-emerald-400 transition-colors duration-300" />
                 </div>
               </div>
             </div>
@@ -474,6 +489,35 @@ const Index = () => {
           <div className="flex flex-col items-center">
             <span className="text-sm text-white/60 mb-2">Scroll to explore</span>
             <ChevronDown className="w-6 h-6 text-white/60" />
+          </div>
+        </div>
+      </section>
+
+      {/* Training Section */}
+      <section className="relative z-10 px-6 py-20 scroll-section">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300 flex items-center justify-center">
+            <GraduationCap className="w-8 h-8 mr-3" />
+            Training
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {trainings.map((t, index) => (
+              <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-2">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors duration-300">{t.title}</h3>
+                  <p className="text-blue-400 mb-1">{t.provider}</p>
+                  <p className="text-gray-400 text-sm mb-1">{t.location}</p>
+                  <p className="text-gray-400 text-sm mb-3">{t.duration}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {t.focusAreas.map((fa, i) => (
+                      <Badge key={i} variant="outline" className="border-white/30 text-white/80 text-xs hover:scale-105 transition-all duration-300">
+                        {fa}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -510,23 +554,18 @@ const Index = () => {
             <div className="lg:w-1/2 lg:pl-12">
               <h2 className="text-4xl font-bold mb-6 text-blue-400 hover:text-cyan-400 transition-colors duration-300">About Me</h2>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
-                I'm Maria Sultan, a Software Engineering student with hands-on experience in AI and natural language processing. 
-                I specialize in LLMs, RAG pipelines, and chatbot systems, gained from internships at NESCOM and NUTECH Innovation Center.
-                I'm passionate about building practical, data-driven solutions for real-world problems.
+                I'm Ali Raza, a network and security engineer focused on building reliable, secure and high-availability infrastructures.
+                I have hands-on experience across routing, switching, VPNs, firewalls, NOC operations, Windows Server/AD and Azure administration.
+                I enjoy turning complex operational requirements into stable, well-documented solutions.
               </p>
               <p className="text-lg leading-relaxed mb-6 text-gray-300 hover:text-white transition-colors duration-300">
-                My key projects include a Multi-Agent SQL Assistant using Agentic RAG Architecture, 
-                an FJWU Prospectus Q&A Chatbot with semantic search capabilities, and an Infectious Disease Prediction system. 
-                I'm proficient in Python, TensorFlow, PyTorch, Autoencoders, and Pandas.
+                Recent experience includes NOC monitoring and incident response, enterprise network deployments and hardening,
+                and systems administration for Windows Server and Microsoft 365 environments.
               </p>
               <div className="flex flex-wrap gap-4 mb-6">
                 <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 hover:scale-105 transition-all duration-300 hover:bg-blue-600/30">
                   <Award className="w-4 h-4 mr-2" />
-                  BETA MLSA - Microsoft
-                </Badge>
-                <Badge className="bg-purple-600/20 text-purple-300 border-purple-600/30 hover:scale-105 transition-all duration-300 hover:bg-purple-600/30">
-                  <Users className="w-4 h-4 mr-2" />
-                  Youth Empowerment Cofounder
+                  Microsoft Learn Student Ambassador (Volunteer)
                 </Badge>
               </div>
 
@@ -535,102 +574,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Enhanced Projects Section */}
-      <section 
-        id="projects" 
-        className="relative z-10 px-6 py-20 scroll-section"
-        style={{
-          transform: `translateY(${scrollY * 0.05}px)`
-        }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300">Featured Projects</h2>
-          
-          <div className="relative">
-            <button
-              aria-label="Previous projects"
-              onClick={() => scrollCarouselByViewport('left')}
-              disabled={!canScrollLeft}
-              className={`hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/20 backdrop-blur bg-black/30 hover:bg-black/50 transition ${!canScrollLeft ? 'opacity-40 cursor-not-allowed' : 'opacity-100'}`}
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              aria-label="Next projects"
-              onClick={() => scrollCarouselByViewport('right')}
-              disabled={!canScrollRight}
-              className={`hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/20 backdrop-blur bg-black/30 hover:bg-black/50 transition ${!canScrollRight ? 'opacity-40 cursor-not-allowed' : 'opacity-100'}`}
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-
-            <div
-              ref={carouselRef}
-              role="region"
-              aria-label="Projects carousel"
-              className="flex gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth px-1 pb-2 scrollbar-hide"
-              style={{
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none'
-              }}
-            >
-            {projects.map((project, index) => (
-              <Card 
-                key={index} 
-                  className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-500 group hover:scale-105 hover:-translate-y-2 snap-start shrink-0 w-[85vw] md:w-[48%] lg:w-[32%]"
-                style={{
-                  animationDelay: `${index * 0.2}s`,
-                  transform: `translateY(${scrollY * 0.02}px)`
-                }}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 group-hover:scale-110 transition-all duration-300">
-                      {project.type}
-                    </Badge>
-                    <Calendar className="w-4 h-4 text-gray-400 group-hover:text-blue-400 transition-colors duration-300" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-400 transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm mb-3">{project.duration}</p>
-                  <p className="text-gray-300 mb-4 leading-relaxed group-hover:text-white transition-colors duration-300">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <Badge 
-                        key={techIndex} 
-                        variant="outline" 
-                        className="border-white/30 text-white/80 text-xs hover:scale-105 transition-all duration-300 hover:border-blue-400/50"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <a 
-                   href={project.githubLink} 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                    className="w-full"
-                   >
-                   <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="w-full border-white/30 text-white hover:bg-white hover:text-black group-hover:scale-105 transition-all duration-300"
-                   >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    View Details
-                   </Button>
-                  </a>
-                </CardContent>
-              </Card>
-            ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* Enhanced Skills Section */}
       <section 
         id="skills" 
@@ -640,7 +584,7 @@ const Index = () => {
         }}
       >
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300">Technical Skills</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 hover:text-cyan-400 transition-colors duration-300">Technical Skills</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {skills.map((skill, index) => (
@@ -650,7 +594,7 @@ const Index = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-lg font-semibold group-hover:text-blue-400 transition-colors duration-300">
+                  <span className="text-lg font-semibold group-hover:text-cyan-400 transition-colors duration-300">
                     {skill.name}
                   </span>
                   <Badge 
@@ -662,7 +606,7 @@ const Index = () => {
                 </div>
                 <div className="w-full bg-white/20 rounded-full h-2 mb-2 overflow-hidden">
                   <div 
-                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-1000 hover:from-cyan-400 hover:to-blue-500"
+                    className="bg-gradient-to-r from-cyan-500 to-emerald-500 h-2 rounded-full transition-all duration-1000 hover:from-cyan-400 hover:to-emerald-500"
                     style={{ 
                       width: `${skill.level}%`,
                       transform: `scaleX(${scrollY > 1000 ? 1 : scrollY / 1000})`
@@ -687,7 +631,7 @@ const Index = () => {
         }}
       >
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300">Professional Experience</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 hover:text-cyan-400 transition-colors duration-300">Professional Experience</h2>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {experience.map((exp, index) => (
@@ -712,8 +656,8 @@ const Index = () => {
                   </h3>
                   
                   <div className="flex items-center space-x-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-blue-400" />
-                    <span className="text-blue-400 font-medium">{exp.company}</span>
+                    <Briefcase className="w-4 h-4 text-cyan-400" />
+                    <span className="text-cyan-400 font-medium">{exp.company}</span>
                   </div>
                   
                   <div className="flex items-center space-x-2 mb-3">
@@ -748,7 +692,7 @@ const Index = () => {
       {/* Education Section */}
       <section className="relative z-10 px-6 py-20 scroll-section">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300 flex items-center justify-center">
+          <h2 className="text-4xl font-bold text-center mb-16 hover:text-cyan-400 transition-colors duration-300 flex items-center justify-center">
             <GraduationCap className="w-8 h-8 mr-3" />
             Education
           </h2>
@@ -756,8 +700,8 @@ const Index = () => {
             {education.map((edu, index) => (
               <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-2">
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors duration-300">{edu.degree}</h3>
-                  <p className="text-blue-400 mb-2">{edu.institution}</p>
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-cyan-400 transition-colors duration-300">{edu.degree}</h3>
+                  <p className="text-cyan-400 mb-2">{edu.institution}</p>
                   <p className="text-gray-400 text-sm mb-2">{edu.duration}</p>
                   <p className="text-green-400 font-semibold">
                     {edu.cgpa ? `CGPA: ${edu.cgpa}` : `Percentage: ${edu.percentage}`}
@@ -772,7 +716,7 @@ const Index = () => {
       {/* Certifications & Leadership Section */}
       <section className="relative z-10 px-6 py-20 scroll-section">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 hover:text-blue-400 transition-colors duration-300 flex items-center justify-center">
+          <h2 className="text-4xl font-bold text-center mb-16 hover:text-cyan-400 transition-colors duration-300 flex items-center justify-center">
             <Trophy className="w-8 h-8 mr-3" />
             Achievements & Certifications
           </h2>
@@ -789,7 +733,7 @@ const Index = () => {
                   <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-1">
                     <CardContent className="p-4">
                       <div className="flex items-center">
-                        <BookOpen className="w-5 h-5 mr-3 text-blue-400 group-hover:text-yellow-400 transition-colors duration-300" />
+                        <BookOpen className="w-5 h-5 mr-3 text-cyan-400 group-hover:text-yellow-400 transition-colors duration-300" />
                         <span className="text-gray-300 group-hover:text-white transition-colors duration-300">{cert}</span>
                       </div>
                     </CardContent>
@@ -802,19 +746,19 @@ const Index = () => {
             <div>
               <h3 className="text-2xl font-semibold mb-8 flex items-center text-green-400">
                 <Users className="w-6 h-6 mr-3" />
-                Leadership & Community
+                Volunteering
               </h3>
               <div className="space-y-4">
+               
                 <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-1">
                   <CardContent className="p-6">
-                    <h4 className="font-semibold text-blue-400 group-hover:text-green-400 transition-colors duration-300 mb-2">Youth Empowerment Cofounder</h4>
-                    <p className="text-gray-300 text-sm group-hover:text-white transition-colors duration-300">Leading community initiatives to empower youth through technology</p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:scale-105 transition-all duration-300 group hover:-translate-y-1">
-                  <CardContent className="p-6">
-                    <h4 className="font-semibold text-purple-400 group-hover:text-green-400 transition-colors duration-300 mb-2">BETA MLSA - Microsoft</h4>
-                    <p className="text-gray-300 text-sm group-hover:text-white transition-colors duration-300">Student Ambassador facilitating tech community collaboration</p>
+                    <h4 className="font-semibold text-purple-400 group-hover:text-green-400 transition-colors duration-300 mb-2"> MLSA Ambassador - Microsoft</h4>
+                    <ul className="list-disc ml-5 text-gray-300 text-sm space-y-2">
+                      <li>Mentored over 50 students, leading to a 40% increase in engagement in technical workshops.</li>
+                      <li>Organized 10+ workshops and webinars; fostered a collaborative tech community with 80% attendee satisfaction.</li>
+                      <li>Promoted Microsoft technologies via interactive learning, attracting 150+ participants.</li>
+                      <li>Collaborated with global student ambassadors and industry experts to share knowledge and best practices.</li>
+                    </ul>
                   </CardContent>
                 </Card>
               </div>
@@ -840,25 +784,25 @@ const Index = () => {
               </div>
               
               <div className="mt-8">
-                <h3 className="text-2xl font-bold mb-6 text-blue-400">Get in touch</h3>
+                <h3 className="text-2xl font-bold mb-6 text-cyan-400">Get in touch</h3>
                 <p className="text-gray-300 mb-6">
-                  I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and AI. 
+                  I'm always open to discussing new opportunities, collaborations, or just having a chat about technology. 
                   Feel free to reach out through any of the channels below.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
-                    <Mail className="w-5 h-5 text-blue-400" />
-                    <span>sultanmaria940@gmail.com</span>
+                    <Mail className="w-5 h-5 text-cyan-400" />
+                    <span>aleeraza665@gmail.com</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Github className="w-5 h-5 text-blue-400" />
-                    <a href="https://github.com/MariaSultanBahoo" className="hover:text-blue-400 transition-colors">
-                      github.com/MariaSultanBahoo
+                    <Linkedin  className="w-5 h-5 text-cyan-400" />
+                    <a href="#" className="hover:text-cyan-400 transition-colors">
+                    linkedin.com/in/aleeraza-ar
                     </a>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <MapPin className="w-5 h-5 text-blue-400" />
-                    <span>Rawalpindi, Pakistan</span>
+                    <MapPin className="w-5 h-5 text-cyan-400" />
+                    <span>Islamabad, Pakistan</span>
                   </div>
                 </div>
               </div>
@@ -917,12 +861,12 @@ const Index = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={4}
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed"
                       disabled={isSubmitting}
                     />
                     <Button 
                       type="submit" 
-                      className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? 'Sending...' : 'Send Message'}
@@ -945,11 +889,11 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex space-x-8 mb-6 md:mb-0">
-              {['Home', 'About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item, index) => (
+              {['Home', 'About', 'Skills', 'Experience', 'Contact'].map((item, index) => (
                 <a 
                   key={item}
                   href={`#${item.toLowerCase()}`} 
-                  className="hover:text-blue-400 transition-all duration-300 hover:scale-110 relative group smooth-scroll"
+                  className="hover:text-cyan-400 transition-all duration-300 hover:scale-110 relative group smooth-scroll"
                   style={{ animationDelay: `${index * 0.1}s` }}
                   onClick={(e) => {
                     e.preventDefault();
@@ -960,16 +904,16 @@ const Index = () => {
                   }}
                 >
                   {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
                 </a>
               ))}
             </div>
             
             <div className="flex space-x-4">
-              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-all duration-300 cursor-pointer hover:scale-110 hover:-translate-y-1">
+              <div className="w-10 h-10 bg-cyan-600 rounded-full flex items-center justify-center hover:bg-cyan-700 transition-all duration-300 cursor-pointer hover:scale-110 hover:-translate-y-1">
                 <Github className="w-5 h-5" />
               </div>
-              <div className="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-all duration-300 cursor-pointer hover:scale-110 hover:-translate-y-1">
+              <div className="w-10 h-10 bg-cyan-700 rounded-full flex items-center justify-center hover:bg-cyan-800 transition-all duration-300 cursor-pointer hover:scale-110 hover:-translate-y-1">
                 <Linkedin className="w-5 h-5" />
               </div>
               <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-700 transition-all duration-300 cursor-pointer hover:scale-110 hover:-translate-y-1">
@@ -980,7 +924,7 @@ const Index = () => {
           
           <div className="text-center mt-8 pt-8 border-t border-white/10">
             <p className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center justify-center">
-              © 2025 Maria Sultan. All rights reserved. • Built with React & Tailwind CSS 
+              © 2025 Ali Raza. All rights reserved. • Built with React & Tailwind CSS 
               <Globe className="w-4 h-4 ml-2 text-green-400 animate-spin-slow" />
             </p>
           </div>
